@@ -1,0 +1,46 @@
+<!-- last version? -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Controller LED</title>
+    <link rel="stylesheet" type="text/css" href="style//style.css">
+    <link rel="icon" type="image/x-icon" href="img//light.ico">
+</head>
+
+<body onload="carica()">
+    <statusConnection id="connessione"></statusConnection>
+    <h1 style="text-align: center; margin-top: 25px;">Controller LED</h1>
+
+    <div style="position: relative; left: 50%; width: 95%; margin-top: 330px; transform: translate(-50%, -50%);">
+        <label class="label"><input class="input" type="checkbox" checked id="onOff"><span
+                class="span"></span></label><br><br><br><br>
+        <slid>
+            <input class="slider" type="range" min="0" max="100" id="slider">
+            <h3 style="text-align: center; right: 10%; position: relative; bottom: 35px;" id="value">Luminosita': </h3>
+            <br><br><br>
+        </slid>
+        <h3 style="text-align: center; right: 30%; position: relative; bottom: -35px;">LED Armadio</h3><label
+            class="small_label"><input class="small_input" type="checkbox" checked id="OnOffArmadio"><span
+                class="small_span"></span></label>
+    </div>
+    <container>
+        <a id="Color_1"><img src="img//IMG-(4).jpg"></a><a id="Color_2"><img src="img//IMG-(5).jpg"></a><a
+            id="Color_3"><img src="img//IMG-(6).jpg"></a><br>
+        <a id="Color_4"><img src="img//IMG-(1).jpg"></a><a id="Color_5"><img src="img//IMG-(2).jpg"></a><a
+            id="Color_6"><img src="img//IMG-(3).jpg"></a><br>
+        <a id="Color_7"><img src="img//IMG-(7).jpg"></a><a id="Color_8"><img src="img//IMG-(8).jpg"></a><a
+            id="Color_9"><img src="img//IMG-(9).jpg"></a><br>
+        <a id="Color_10"><img src="img//IMG-(10).jpg"></a><a id="Color_11"><img src="img//IMG-(11).jpg"></a><a
+            id="Color_12"><img src="img//IMG-(12).jpg"></a><br>
+        <a id="Color_13"><img src="img//IMG-(13).jpg"></a><a id="Color_14"><img src="img//IMG-(14).jpg"></a><a
+            id="Color_15"><img src="img//IMG-(15).jpg"></a><br>
+        <a id="Color_16"><img src="img//IMG-(16).jpg"></a><a id="Color_17"><img src="img//GIF-Multicolor.gif"></a><a
+            id="Color_18"><img src="img//GIF-Disco.gif"></a><br>
+    </container>
+
+    <script src="script/script.js"></script>
+</body>
+
+
+</html>
