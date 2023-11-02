@@ -64,8 +64,8 @@ void gestisciMessaggio(uint8_t * payload, size_t length) {
     statoLed = true;
     irsend.sendNEC(0xF740BF); //OFF
   } else if(messaggio.substring(0, 3) == "Lum") {
-    luminosita = messaggio.substring(4,6).toInt();
-    setLuminosita(luminosita);
+    int newLuminosita = messaggio.substring(4,6).toInt();
+    setLuminosita(newLuminosita);
   } else if(messaggio == "Armadio=ON") {
     ledArmadio = true;
     digitalWrite(RELE, HIGH);
@@ -129,7 +129,7 @@ void gestisciMessaggio(uint8_t * payload, size_t length) {
     }
   }
 
-  digitalWrite(2, statoLed);
+  //digitalWrite(2, statoLed);
 
   //do riscontro
   inviaInBroadcast(messaggio);
@@ -191,12 +191,14 @@ void setLuminosita(int newVal){
     if(newVal > luminosita){
         for(int i = luminosita; i <= newVal; i++){
             irsend.sendNEC(0xF700FF);
-            delay(50);
+            delay(20);
         }       
     }else{
         for(int i = luminosita; i >= newVal; i--){
             irsend.sendNEC(0xF7807F);
-            delay(50);
+            delay(20);
         } 
     }
+
+    luminosita = newVal;
 }
