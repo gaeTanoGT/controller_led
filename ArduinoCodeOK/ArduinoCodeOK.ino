@@ -21,7 +21,7 @@ bool ledArmadio = true;
 int luminosita = 50;  //0 - 50
 
 void setup() {
-  pinMode(2, OUTPUT);
+  //pinMode(2, OUTPUT);
   pinMode(RELE, OUTPUT);
   digitalWrite(RELE, LOW);
 
@@ -35,7 +35,7 @@ void setup() {
   }
   Serial.println("\nWiFi " + String(ssid) + " connesso!");
   Serial.println(WiFi.localIP());
-  digitalWrite(2, statoLed);
+  //digitalWrite(2, statoLed);
 
   webSocket.begin();
   webSocket.onEvent(webSocketEvent);
@@ -188,17 +188,28 @@ void setupLuminosita(){
 }
 
 void setLuminosita(int newVal){
+    if(newVal == 0){
+        for(int i = 0; i <= 50; i++){
+            irsend.sendNEC(0xF7807F);
+            delay(10);
+        }       
+    } else if(newVal == 50){
+        for(int i = 0; i <= 50; i++){
+            irsend.sendNEC(0xF700FF);
+            delay(10);
+        }       
+    }
+
     if(newVal > luminosita){
         for(int i = luminosita; i <= newVal; i++){
-            irsend.sendNEC(0xF700FF);
-            delay(20);
+            irsend.sendNEC(0xF700FF);   //++
+            delay(10);
         }       
     }else{
         for(int i = luminosita; i >= newVal; i--){
-            irsend.sendNEC(0xF7807F);
-            delay(20);
+            irsend.sendNEC(0xF7807F);   //--
+            delay(10);
         } 
     }
-
     luminosita = newVal;
 }
