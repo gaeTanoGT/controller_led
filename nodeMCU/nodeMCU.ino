@@ -9,7 +9,7 @@
 #define RELE D6 //pin 6 rele
 
 const char* ssid = "TIM-19445283";
-const char* password = "bhszxPfdYtNHC5YwsO6CnRLw";
+//@TODO const char* password = "*password*";
 
 WebSocketsServer webSocket(80); // Crea un server WebSocket sulla porta 80
 
