@@ -3,6 +3,7 @@ var p = document.getElementById("value");
 var immagini = document.querySelectorAll('a');
 var connessione = document.getElementById("connessione");
 var messaggio, sendMessaggio, time;
+var wasArmadioChecked = true;
 
 //aggiorna label al cambiare del valore dello slider
 slider.oninput = function () {
@@ -16,14 +17,8 @@ document.getElementById("onOff").addEventListener("click", function () {
 
 //al rilascio dello slider invia messaggio
 slider.onchange = function () {
-    //location.href= Math.floor(slider.value / 2);
     inviaMessaggioAlNodeMCU("Lum=" + Math.floor(slider.value / 2));
 }
-
-//alla pressione del tasto onOffArmadio chiama la funzione inviaComandoOnOffArmadio()
-document.getElementById("OnOffArmadio").addEventListener("click", function () {
-    inviaComandoOnOffArmadio();
-});
 
 //alla pressione di un'immagine invia il colore selezionato al NodeMCU
 immagini.forEach(function (immagine) {
@@ -36,30 +31,22 @@ immagini.forEach(function (immagine) {
 
 //aggiorno valore luminosita'
 function carica() {
-    p.innerHTML = "Luminosita': " + slider.value;
+    p.innerHTML = "Luminosità: " + slider.value;
 }
 
 //manda messaggio onOff led
-function inviaComandoOnOff() {
+async function inviaComandoOnOff() {
     var comando;
+    var armadio = document.getElementById("OnOffArmadio");
     if (document.getElementById("onOff").checked == true) {
         comando = "ON";
     } else {
         comando = "OFF";
     }
-
+    
     inviaMessaggioAlNodeMCU(comando);
-}
-
-function inviaComandoOnOffArmadio() {
-    var comando;
-    if (document.getElementById("OnOffArmadio").checked == true) {
-        comando = "Armadio=ON";
-    } else {
-        comando = "Armadio=OFF";
-    }
-
-    inviaMessaggioAlNodeMCU(comando);
+    
+    await new Promise(r => setTimeout(r, 10));
 }
 
 //apertura webSocket con nodeMCU alla porta 80
@@ -82,8 +69,6 @@ socket.onmessage = function (event) {
         slider.value = String(valore);
         carica();
     }
-    else if (messaggio == "Armadio=ON" || messaggio == "Armadio=OFF")
-        document.getElementById("OnOffArmadio").checked = (messaggio === "Armadio=ON");
 };
 
 socket.onclose = function (event) {
@@ -97,14 +82,15 @@ function inviaMessaggioAlNodeMCU(messaggio) {
 
     socket.send(messaggio);
 
-    time = 0;
-    setTimeout(isAck, 10);
+    if(messaggio.substr(0, 3) != "Lum"){
+        time = 0;
+        setTimeout(isAck, 10);
+    }
 }
 
 function isAck(){
     if(time > 100){
         console.log("Tentativo ricezione ack fallito");
-        connessione.style.backgroundColor = "#f83a3a";
     } else if(messaggio != sendMessaggio){
         time++;
         setTimeout(isAck, 10);
