@@ -1,12 +1,12 @@
-Progetto client server per l'interfacciamento verso delle strisce LED pilotabili solo attraverso telecomando infrarossi
+# Progetto Controllo Remoto per Strisce LED con NodeMCU e Infrarossi
+## Descrizione del Progetto
+Questo progetto consente di controllare delle strisce LED pilotabili solo attraverso un telecomando infrarossi utilizzando un server NodeMCU. L'interfacciamento avviene attraverso una piattaforma web accessibile tramite l'indirizzo IP del server. La pagina web (index.html) incorpora API per la comunicazione bidirezionale con il NodeMCU, consentendo agli utenti di controllare e monitorare lo stato delle strisce LED da qualsiasi dispositivo connesso alla rete.
 
-requisiti:
-- nodeMCU
-- ir led
-- piattaforma per depositare il sito web
+## Requisiti Hardware
+- NodeMCU
+- LED infrarossi
+- Strisce LED controllate tramite segnali infrarossi
 
-
-accedendo attraverso l'ip del server sarà possibile visualizzare la pagina index.html.
-lo script della pagina integra delle API per la comunicazione verso il nodeMCU.
-il nodeMCU alla ricezione dei messaggi invia segnali infrarossi specifici al ricevitore delle strisce led, simulandone il controller.
-oltretutto la pagina aggiorna dinamicamente lo stato dei pulsanti in base alle modifiche effettuate dagli altri client.
+## Requisiti Software
+- Web server per ospitare la pagina web
+- ArduinoIDE (o altro ambiente di sviluppo per NodeMCU)
