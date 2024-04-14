@@ -1,10 +1,13 @@
-<!DOCTYPE html>
+<!-- last version? -->
+<!DOCTYPE html> 
 <html>
 
 <head>
+    <meta name="viewport">
     <title>Controller LED</title>
     <link rel="stylesheet" type="text/css" href="style//style.css">
-    <link rel="icon" type="image/x-icon" href="img//light.ico">
+    <link rel="icon" type="image/x-icon" href="img//ico//light.ico">
+    <link rel="manifest" href="/mainfest.json">
 </head>
 
 <body onload="carica()">
@@ -16,9 +19,14 @@
                 class="span"></span></label><br><br><br><br>
         <slid>
             <input class="slider" type="range" min="0" max="100" id="slider">
-            <h3 style="text-align: center; right: 10%; position: relative; bottom: 35px;" id="value">Luminosità: </h3>
+            <h3 style="text-align: center; right: 10%; position: relative; bottom: 35px;" id="value">Luminosita': </h3>
             <br><br><br>
         </slid>
+        <!--
+            <h3 style="text-align: center; right: 30%; position: relative; bottom: -35px;">LED Armadio</h3><label
+                class="small_label"><input class="small_input" type="checkbox" checked id="OnOffArmadio"><span
+                    class="small_span"></span></label>
+        -->
     </div>
     <container>
         <a id="Color_1"><img src="img//IMG-(4).jpg"></a><a id="Color_2"><img src="img//IMG-(5).jpg"></a><a
