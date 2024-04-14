@@ -2,7 +2,6 @@ var slider = document.getElementById("slider");
 var p = document.getElementById("value");
 var immagini = document.querySelectorAll('a');
 var connessione = document.getElementById("connessione");
-var butInstall;
 var messaggio, sendMessaggio, time;
 var wasArmadioChecked = true;
 
@@ -39,8 +38,7 @@ immagini.forEach(function (immagine) {
 
 //aggiorno valore luminosita'
 function carica() {
-    p.innerHTML = "Luminosita': " + slider.value;
-    butInstall = document.getElementById("butInstall");
+    p.innerHTML = "Luminosità: " + slider.value;
 }
 
 //manda messaggio onOff led
@@ -130,36 +128,3 @@ function isAck(){
         setTimeout(isAck, 10);
     }
 }
-
-//registro service worker per gestire eventi di rete
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      }, function(err) {
-        console.log('ServiceWorker registration failed: ', err);
-      });
-    });
-  }
-  
-/*
-//abilito offline mode per servizio pwa (Progressive web apps)
-self.addEventListener('fetch', function(event) {
-    //rispondo con l'oggetto memorizzato nella cache o vado avanti e recupera l'URL effettivo
-    event.respondWith(
-        caches.match(event.request).then(function(response) {
-            if (response) {
-                // recupero dalla cache
-                return response;
-            }
-
-            //se non Ã¨ stata tprovata cache, restituisci il contenuto di default di offline 
-            if (event.request.mode === 'navigate') {
-                return caches.match('./index.html');
-            }
-
-            // recupera normalmente la richiesta
-            return fetch(event.request);
-        })
-    );
-});*/
